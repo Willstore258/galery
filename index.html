@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GALERY SMP IX NAZHA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #2e7d32;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated Gradient Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #ffffff, #e3f2fd, #e8f5e9, #ffffff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Flower Animation */
+        .flower {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.6;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 2px solid #2e7d32;
+            position: relative;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #2e7d32;
+        }
+        
+        .menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .menu-button {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        
+        .dropdown-content a {
+            color: #2e7d32;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #e8f5e9;
+        }
+        
+        .dropdown-content a.logout {
+            color: #e53935;
+            border-top: 1px solid #eee;
+            margin-top: 5px;
+        }
+        
+        .dropdown-content a.logout:hover {
+            background-color: #ffebee;
+        }
+        
+        .show {
+            display: block;
+        }
+        
+        .gallery {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .gallery img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px;
+            border: 3px solid #2e7d32;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-top: 1px solid #2e7d32;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <!-- Flower elements -->
+    <div class="flower" style="top: 10%; left: 5%; font-size: 30px;">🌸</div>
+    <div class="flower" style="top: 30%; left: 80%; font-size: 40px; animation-delay: 2s;">🌼</div>
+    <div class="flower" style="top: 70%; left: 15%; font-size: 25px; animation-delay: 4s;">🌺</div>
+    <div class="flower" style="top: 20%; left: 50%; font-size: 35px; animation-delay: 1s;">🌻</div>
+    <div class="flower" style="top: 80%; left: 70%; font-size: 30px; animation-delay: 3s;">💮</div>
+    
+    <div class="header">
+        <h1>SMP NAZHA IX</h1>
+    </div>
+    
+    <div class="menu">
+        <button onclick="toggleMenu()" class="menu-button">GALERY ▼</button>
+        <div id="myMenu" class="dropdown-content">
+            <a href="#" onclick="showGallery('gallery1')">GALERY 1</a>
+            <a href="#" class="logout" onclick="logout()">LOGOUT</a>
+        </div>
+    </div>
+    
+    <div id="gallery1" class="gallery">
+        <img src="https://files.catbox.moe/5a6iyr.jpg" alt="Foto Galeri 1">
+        <img src="https://files.catbox.moe/ra3qi8.jpg" alt="Foto Galeri 2">
+    </div>
+    
+    <div class="footer">
+        © By Karya Anak Bangsa Indonesia
+    </div>
+    
+    <script>
+        function toggleMenu() {
+            document.getElementById("myMenu").classList.toggle("show");
+        }
+        
+        function showGallery(galleryId) {
+            // Sembunyikan semua galeri terlebih dahulu
+            var galleries = document.getElementsByClassName("gallery");
+            for (var i = 0; i < galleries.length; i++) {
+                galleries[i].style.display = "none";
+            }
+            
+            // Tampilkan galeri yang dipilih
+            document.getElementById(galleryId).style.display = "block";
+            
+            // Tutup menu dropdown
+            document.getElementById("myMenu").classList.remove("show");
+        }
+        
+        function logout() {
+            // Fungsi untuk logout
+            if(confirm("Apakah Anda yakin ingin logout?")) {
+                alert("Anda telah logout");
+                // Di sini bisa ditambahkan redirect ke halaman login
+                // window.location.href = "login.html";
+            }
+            document.getElementById("myMenu").classList.remove("show");
+        }
+        
+        // Tutup menu dropdown jika klik di luar menu
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-button')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        
+        // Tambahkan bunga secara dinamis
+        document.addEventListener('DOMContentLoaded', function() {
+            const colors = ['#FFC0CB', '#FFD700', '#98FB98', '#ADD8E6', '#DDA0DD'];
+            const flowers = ['🌸', '🌼', '🌺', '🌻', '💮', '🏵️'];
+            
+            for (let i = 0; i < 10; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                
+                // Random position
+                const left = Math.random() * 90;
+                const top = Math.random() * 90;
+                
+                // Random size
+                const size = 20 + Math.random() * 30;
+                
+                // Random animation duration and delay
+                const duration = 10 + Math.random() * 20;
+                const delay = Math.random() * 5;
+                
+                // Random flower and color
+                const flowerChar = flowers[Math.floor(Math.random() * flowers.length)];
+                
+                flower.style.left = `${left}%`;
+                flower.style.top = `${top}%`;
+                flower.style.fontSize = `${size}px`;
+                flower.style.animationDuration = `${duration}s`;
+                flower.style.animationDelay = `${delay}s`;
+                flower.style.color = colors[Math.floor(Math.random() * colors.length)];
+                flower.textContent = flowerChar;
+                
+                document.body.appendChild(flower);
+            }
+        });
+    </script>
+</body>
+  </html>
